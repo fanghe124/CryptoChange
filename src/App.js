@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+var NumberFormat = require('react-number-format');
 
 class App extends Component {
 
@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   componetDidMount(){
-    axios.get('https://min-api.cryptocompare.com/data/price?fsym=BTC,XRP,ETH,XLM&tsyms=CDN,USD,BTC')
+    axios.get('https://min-api.cryptocompare.com/data/price?fsym=BTC,XRP,ETH,XLM&tsyms=CDN')
       .then(res => {
         const cryptos = res.data;
         console.og(cryptos);
@@ -26,13 +26,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {Object.keys(this.state.cryptos).map((key) => (
+
+          <div id="crypto-container">
+            <span className="left">{key}</span>
+            <span className="right"><NumberFormat value={this.state.cryptos[key].CDN} displayType={'text'} decimalPrecision={2} thousandSeparator={true} prefix={'$'} /></span>
+          </div>
+
+        ))}
       </div>
     );
   }
