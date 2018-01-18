@@ -5,22 +5,22 @@ var NumberFormat = require('react-number-format');
 
 class App extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
-      cryptos : []
+      cryptos: []
     };
-
   }
 
-  componetDidMount(){
-    axios.get('https://min-api.cryptocompare.com/data/price?fsym=BTC,XRP,ETH,XLM&tsyms=CDN')
+
+  componentDidMount() {
+    axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,IOT&tsyms=CDN')
       .then(res => {
         const cryptos = res.data;
-        console.og(cryptos);
+        console.log(cryptos);
         this.setState({cryptos: cryptos});
-       } )   
+      })
   }
 
   render() {
@@ -35,7 +35,7 @@ class App extends Component {
 
         ))}
       </div>
-    );
+    )
   }
 }
 
